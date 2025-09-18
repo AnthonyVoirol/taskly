@@ -36,17 +36,20 @@ $task = GetAllTask();
                 if ($key === 'numero') {
                     $numTask = $value;
                 }
+
                 echo '<td>';
-                /*if ($key === 'imgPath') {
-                    echo '<img class="img-fluid" alt="Responsive image" src="' . $value . '" width="150" height="150" </img>';
+                if ($key === 'important' || $key === 'do') {
+                    if ($value === 'true') {
+                        echo '<input type="checkbox" disabled checked >';
+                    } else {
+                        echo '<input type="checkbox" disabled >';
+                    }
                 } else {
                     echo $value;
-                }*/
-                echo $value;
-
+                }
                 echo '</td>';
-
             }
+            echo '</tr>';
         }
         ?>
     </table>
