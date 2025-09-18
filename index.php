@@ -16,9 +16,10 @@ $task = GetAllTask();
 <body>
     <h1>To-Do-List</h1>
 
+    <a href="insertTask.php">Ajout tâche</a>
     <table>
 
-        <head>
+        <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
@@ -28,7 +29,7 @@ $task = GetAllTask();
                 <th>DateLimite</th>
                 <th>Fait</th>
             </tr>
-        </head>
+        </thead>
         <?php
         foreach ($task as $t) {
             echo '<tr>';
