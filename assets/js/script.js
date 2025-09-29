@@ -5,15 +5,13 @@ fetch('assets/php/action.php')
             console.error("Erreur :", data.error);
         } else {
             console.log("Données reçues :", data);
-            const main = document.getElementById('main')
 
-            let article = document.createElement('article')
+            const main = document.getElementById('main');
 
-            section.innerText = data.task
+            const article = document.createElement('article');
+            article.innerText = `${data.id} : ${data.description}`;
 
-            main.appendChild(article)
+            main.appendChild(article);
         }
     })
     .catch(error => console.error("Erreur fetch:", error));
-
-

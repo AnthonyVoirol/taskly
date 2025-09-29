@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do-List</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/script.js" type="module"></script>
+    <script src="assets/js/script.js" defer></script>
 </head>
 
 <body>
