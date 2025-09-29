@@ -1,9 +1,3 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-include("assets/php/dbConfig.php")
-    ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,7 +6,7 @@ include("assets/php/dbConfig.php")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do-List</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js" type="module"></script>
 </head>
 
 <body>

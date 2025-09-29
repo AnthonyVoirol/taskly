@@ -1,11 +1,19 @@
-fetch('assets/php/getData.php')
+fetch('assets/php/action.php')
     .then(response => response.json())
     .then(data => {
         if (data.error) {
             console.error("Erreur :", data.error);
         } else {
             console.log("Données reçues :", data);
-            document.getElementById("main").innerHTML = `<p>${data.nom}</p>`;
+            const main = document.getElementById('main')
+
+            let article = document.createElement('article')
+
+            section.innerText = data.task
+
+            main.appendChild(article)
         }
     })
     .catch(error => console.error("Erreur fetch:", error));
+
+
