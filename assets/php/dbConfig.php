@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$db = "antweb_to-do-list-db";
-$user = "antweb_DB-to-do-list"; 
-$pass = 'V5@nm$mAG3eh+NrU';
+$db = "todolist_dev";
+$user = "root"; 
+$pass = '';
 
 $conn = new mysqli($host, $user, $pass, $db);
 
