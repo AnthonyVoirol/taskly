@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (isset($_SESSION['flash_message'])) {
+    echo '<p style="color: green; text-align:center;">' . htmlspecialchars($_SESSION['flash_message']) . '</p>';
+    unset($_SESSION['flash_message']);
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
