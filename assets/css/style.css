@@ -1,0 +1,70 @@
+.notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    padding: 16px 28px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 7777;
+    font-size: 15px;
+    font-weight: 500;
+    max-width: 90vw;
+    box-shadow: 0 10px 40px rgba(17, 153, 142, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notification::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.notification.show {
+    top: 24px;
+}
+
+.notification.hide {
+    top: -100px;
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9);
+}
+
+.notification:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 15px 50px rgba(17, 153, 142, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Barre de progression */
+.notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 0 0 12px 12px;
+    animation: progress 3s linear;
+}
+
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}

@@ -1,12 +1,16 @@
 <?php
 session_start();
 
-if (isset($_SESSION['flash_message'])) {
-    echo '<p style="color: green; text-align:center;">' . htmlspecialchars($_SESSION['flash_message']) . '</p>';
-    unset($_SESSION['flash_message']);
+
+function message()
+{
+    if (isset($_SESSION['flash_message'])) {
+        $msg = json_encode($_SESSION['flash_message']);
+        echo "<script>showNotification($msg);</script>";
+        unset($_SESSION['flash_message']);
+    }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +20,7 @@ if (isset($_SESSION['flash_message'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do-List</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/script.js" defer></script>
+
 </head>
 
 <body>
@@ -25,6 +29,7 @@ if (isset($_SESSION['flash_message'])) {
     </header>
 
     <main>
+        <a href="assets/php/signIn.php">test</a>
         <section id="main">
             <!-- tâche -->
         </section>
@@ -34,6 +39,8 @@ if (isset($_SESSION['flash_message'])) {
         <p>Fait par Ant.V</p>
         <p>Version 1</p>
     </footer>
+    <script src="assets/js/script.js"></script>
+    <?php message(); ?>
 </body>
 
 </html>
