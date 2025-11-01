@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: assets/php/signIn.php");
+    exit();
+}
 
 function message()
 {
@@ -33,11 +37,11 @@ function message()
         <section id="main">
             <!-- tâche -->
         </section>
+        <a id="addTask" href="index.php">+</a>
     </main>
 
     <footer>
         <p>Fait par Ant.V</p>
-        <p>Version 1</p>
     </footer>
     <script src="assets/js/script.js"></script>
     <?php message(); ?>
