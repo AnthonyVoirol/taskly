@@ -50,6 +50,7 @@ function showTask(tasks) {
 }
 
 function addTask() {
+  const main = document.getElementById("main");
   const form = document.createElement("section");
   form.classList.add("formAdd");
 
@@ -59,16 +60,16 @@ function addTask() {
   addDisplay.innerHTML = `
     <form class="add">
       <label for="nameaAd">Nom</label>
-      <input type="text" id="nameadd" value="${recette.nom}">
+      <input type="text" id="nameadd">
 
       <label for="descriptionAdd">Description</label>
-      <textarea id="descriptionAdd">${recette.description}</textarea>
+      <textarea id="descriptionAdd"></textarea>
 
       <label for="nbPeopleadd">Nombre de personnes</label>
-      <input type="number" id="nbPeopleadd" min="0" value="${recette.nombrePersonnes}">
+      <input type="number" id="nbPeopleadd" min="0">
 
       <label for="preparationAdd">Préparation</label>
-      <textarea id="preparationAdd">${recette.preparation}</textarea>
+      <textarea id="preparationAdd"></textarea>
     </form>
   `;
 
@@ -77,9 +78,6 @@ function addTask() {
 
   let updateButton = document.createElement("button");
   updateButton.innerText = "add";
-  updateButton.addEventListener("click", function () {
-    add(document.getElementsByClassName("add")[0], recette);
-  });
 
   let exitButton = document.createElement("button");
   exitButton.innerText = "Exit";
@@ -92,7 +90,7 @@ function addTask() {
 
   addDisplay.appendChild(addBtn);
   form.appendChild(addDisplay);
-  app.appendChild(form);
+  main.appendChild(form);
 }
 
 function showNotification(message) {

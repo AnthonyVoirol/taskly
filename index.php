@@ -37,7 +37,7 @@ function message()
         <section id="main">
             <!-- tâche -->
         </section>
-        <a id="addTask" href="index.php">+</a>
+        <button id="addTask">+</button>
     </main>
 
     <footer>
