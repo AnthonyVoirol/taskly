@@ -180,7 +180,16 @@ function showEditTask(task, article) {
   deadLineInput.type = "date";
   deadLineInput.value = task.deadLine;
 
+  selectImportance = ["important", "normal", "peu_important"];
+
   const importanceSelect = document.createElement("select");
+
+  for (i = 0; i < selectImportance.length; i++) {
+    const option = document.createElement("option");
+    option.value = selectImportance[i];
+    option.text = selectImportance[i];
+    importanceSelect.appendChild(option);
+  }
 
   article.appendChild(taskInput);
   article.appendChild(descInput);
