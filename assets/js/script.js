@@ -222,69 +222,84 @@ async function sendTaskData(taskData) {
   }
 }
 
-function showEditTask(task, article) {
-  article.innerHTML = "";
+function showEditTask(task) {
+  const main = document.getElementById("main");
 
-  // Inputs pour édition
-  const taskInput = document.createElement("input");
-  taskInput.value = task.task;
+  const form = document.createElement("section");
+  form.classList.add("formAdd");
 
-  const descInput = document.createElement("textarea");
-  descInput.value = task.description;
+  const editDisplay = document.createElement("article");
+  editDisplay.classList.add("addDisplay");
 
-  const deadLineInput = document.createElement("input");
-  deadLineInput.type = "date";
-  deadLineInput.value = task.deadLine;
+  editDisplay.innerHTML = `
+    <form class="add">
+      <label for="nameEdit">Nom</label>
+      <input type="text" id="nameEdit" value="${task.task}" required>
 
-  const selectImportance = ["important", "normal", "peu_important"];
-  const importanceSelect = document.createElement("select");
-  selectImportance.forEach((imp) => {
-    const option = document.createElement("option");
-    option.value = imp;
-    option.text = imp.replace("_", " ");
-    importanceSelect.appendChild(option);
+      <label for="importanceEdit">Importance</label>
+      <select id="importanceEdit">
+        <option value="important">important</option>
+        <option value="normal">normal</option>
+        <option value="peu_important">peu important</option>
+      </select>
+
+      <label for="descriptionEdit">Description</label>
+      <textarea id="descriptionEdit" required>${task.description}</textarea>
+
+      <label for="deadLineEdit">À faire jusqu'à</label>
+      <input type="date" id="deadLineEdit" value="${task.deadLine.split(" ")[0]}" required>
+    </form>
+  `;
+
+  setTimeout(() => {
+    document.getElementById("importanceEdit").value = task.importance;
   });
-  importanceSelect.value = task.importance;
 
-  // Bouton mettre à jour
+  const btnContainer = document.createElement("article");
+  btnContainer.classList.add("addBtn");
+
   const updateBtn = document.createElement("button");
   updateBtn.innerText = "Mettre à jour";
+
   updateBtn.addEventListener("click", async (event) => {
     event.preventDefault();
 
-    const taskData = {
+    const updatedTask = {
       id: task.id,
-      task: taskInput.value,
-      description: descInput.value,
-      deadLine: deadLineInput.value,
-      importance: importanceSelect.value,
+      task: document.getElementById("nameEdit").value,
+      importance: document.getElementById("importanceEdit").value,
+      description: document.getElementById("descriptionEdit").value,
+      deadLine: document.getElementById("deadLineEdit").value
     };
 
-    const result = await updateTaskData(taskData);
+    const result = await updateTaskData(updatedTask);
 
     if (result.success) {
-      renderTaskArticle(task, article);
+      tasks = await recupTasks();
+      showTask(tasks);
+      form.remove();
+      showNotification("Tâche mise à jour !");
     } else {
       showNotification("Erreur lors de la modification de la tâche.");
     }
   });
 
-  // Bouton exit
   const exitBtn = document.createElement("button");
   exitBtn.innerText = "Exit";
+
   exitBtn.addEventListener("click", () => {
-    renderTaskArticle(task, article);
+    form.remove();
   });
 
-  article.appendChild(taskInput);
-  article.appendChild(descInput);
-  article.appendChild(deadLineInput);
-  article.appendChild(importanceSelect);
-  article.appendChild(updateBtn);
-  article.appendChild(exitBtn);
+  btnContainer.appendChild(updateBtn);
+  btnContainer.appendChild(exitBtn);
+
+  editDisplay.appendChild(btnContainer);
+  form.appendChild(editDisplay);
+  main.appendChild(form);
 }
 
-// Fonction pour reconstruire un article sans recharger tout
+
 function renderTaskArticle(task, article) {
   article.innerHTML = "";
 
