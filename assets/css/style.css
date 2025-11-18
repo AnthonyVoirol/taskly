@@ -20,6 +20,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
+  display: flex;
+  justify-content: space-between;
 }
 
 header h1 {
@@ -213,6 +215,8 @@ article button:nth-of-type(2) {
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
   transition: all 0.2s ease;
   z-index: 50;
+  margin-bottom: 50px;
+  padding-bottom: 5px;
 }
 
 #addTask:hover {

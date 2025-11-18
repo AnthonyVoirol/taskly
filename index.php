@@ -30,6 +30,7 @@ function message()
 <body>
     <header>
         <h1>To-Do-List</h1>
+        <img class="avatar" src="<?php $user['avatar']; ?>" alt="avatar">
     </header>
 
     <main>
