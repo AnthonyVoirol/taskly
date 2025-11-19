@@ -71,4 +71,28 @@ function login_user(mysqli $conn, string $email, string $password): string
 
     return 'Login successful.';
 }
+
+function getUserInfo(mysqli $conn): string
+{
+    if (!isset($_SESSION['user_id'])) {
+        return '';
+    }
+
+    $stmt = $conn->prepare('SELECT avatar_path FROM users WHERE id = ?');
+    $stmt->bind_param('i', $_SESSION['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+
+    if ($user && isset($user['avatar_path'])) {
+        $_SESSION['avatar'] = $user['avatar_path'];
+        return $user['avatar_path'];
+    } else {
+        $_SESSION['avatar'] = 'assets/avatars/avatars_default.png';
+        return $_SESSION['avatar'];
+    }
+}
+
+
 ?>

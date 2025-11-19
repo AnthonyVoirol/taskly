@@ -1,15 +1,18 @@
 let tasks = [];
 
 async function init() {
+  const main = document.getElementById("main");
   tasks = await recupTasks();
   if (tasks) {
-    showTask(tasks);
+    showTask(tasks,main);
   }
 
   const btnAdd = document.getElementById("addTask");
   btnAdd.addEventListener("click", function () {
     addTask();
   });
+
+  OpenSettingAccount(main);
 }
 
 init();
@@ -39,8 +42,7 @@ async function recupTasks() {
   }
 }
 
-function showTask(tasks) {
-  const main = document.getElementById("main");
+function showTask(tasks, main) {
   main.innerHTML = "";
 
   tasks.forEach((task) => {
@@ -90,7 +92,7 @@ function showTask(tasks) {
 
     status.addEventListener("change", async () => {
       article.classList.toggle("isDone", status.checked);
-      
+
       try {
         const response = await fetch("assets/php/API.php", {
           method: "PUT",
@@ -247,7 +249,9 @@ function showEditTask(task) {
       <textarea id="descriptionEdit" required>${task.description}</textarea>
 
       <label for="deadLineEdit">À faire jusqu'à</label>
-      <input type="date" id="deadLineEdit" value="${task.deadLine.split(" ")[0]}" required>
+      <input type="date" id="deadLineEdit" value="${
+        task.deadLine.split(" ")[0]
+      }" required>
     </form>
   `;
 
@@ -269,7 +273,7 @@ function showEditTask(task) {
       task: document.getElementById("nameEdit").value,
       importance: document.getElementById("importanceEdit").value,
       description: document.getElementById("descriptionEdit").value,
-      deadLine: document.getElementById("deadLineEdit").value
+      deadLine: document.getElementById("deadLineEdit").value,
     };
 
     const result = await updateTaskData(updatedTask);
@@ -298,7 +302,6 @@ function showEditTask(task) {
   form.appendChild(editDisplay);
   main.appendChild(form);
 }
-
 
 function renderTaskArticle(task, article) {
   article.innerHTML = "";

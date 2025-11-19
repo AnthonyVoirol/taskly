@@ -1,5 +1,11 @@
 <?php
+require_once 'assets/php/auth.php';
+require_once 'assets/php/dbConfig.php';
+
 session_start();
+getUserInfo($conn);
+
+
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: assets/php/signIn.php");
@@ -30,7 +36,7 @@ function message()
 <body>
     <header>
         <h1>To-Do-List</h1>
-        <img class="avatar" src="<?php $user['avatar']; ?>" alt="avatar">
+        <img class="avatar" id="avatar" src="<?php echo $_SESSION['avatar']; ?>" alt="avatar">
     </header>
 
     <main>
@@ -44,6 +50,7 @@ function message()
         <p>Fait par Ant.V</p>
     </footer>
     <script src="assets/js/script.js?v=V2"></script>
+    <script src="assets/js/account.js"></script>
     <?php message(); ?>
 </body>
 
