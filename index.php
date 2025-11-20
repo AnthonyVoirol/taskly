@@ -34,7 +34,7 @@ function message()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do-List</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=2.5">
+    <link rel="stylesheet" href="assets/css/style.css?v=Beta">
 
 </head>
 
@@ -76,8 +76,8 @@ function message()
     <footer>
         <p>Fait par Ant.V</p>
     </footer>
-    <script src="assets/js/script.js?v=V2.5"></script>
-    <script src="assets/js/account.js?v=V1"></script>
+    <script src="assets/js/script.js?v=Beta"></script>
+    <script src="assets/js/account.js?v=Beta"></script>
     <?php message(); ?>
 </body>
 
