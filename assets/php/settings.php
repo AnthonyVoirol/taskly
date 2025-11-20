@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <a href="../../">retour</a>
     <section>
         <h1>Paramètres</h1>
         <button class="noButton">Compte</button>
