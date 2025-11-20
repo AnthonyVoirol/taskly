@@ -1,10 +1,18 @@
 let tasks = [];
+let sortSelect;
 
 async function init() {
   tasks = await recupTasks();
   if (tasks) {
     showTask(tasks);
   }
+
+  sortSelect = document.getElementById("sortTasks");
+  sortSelect.addEventListener("change", () => {
+    const sortBy = sortSelect.value;
+    sortTasks(sortBy);
+    showTask(tasks);
+  });
 
   const btnAdd = document.getElementById("addTask");
   btnAdd.addEventListener("click", function () {
@@ -45,9 +53,13 @@ function showTask(tasks) {
   const main = document.getElementById("main");
   main.innerHTML = "";
 
+  const divDone = document.getElementById("done");
+  divDone.classList.add("taskDone");
+  divDone.innerHTML = "";
+
   tasks.forEach((task) => {
     const article = document.createElement("article");
-    // Remplace la partie article.innerHTML par :
+
     const taskContent = document.createElement("div");
     taskContent.classList.add("task-content");
 
@@ -90,8 +102,20 @@ function showTask(tasks) {
     status.type = "checkbox";
     status.checked = task.isDone;
 
+    if (task.isDone) {
+      article.classList.add("isDone");
+      divDone.appendChild(article);
+    } else {
+      main.appendChild(article);
+    }
+
     status.addEventListener("change", async () => {
       article.classList.toggle("isDone", status.checked);
+      if (status.checked) {
+        divDone.appendChild(article);
+      } else {
+        main.appendChild(article);
+      }
 
       try {
         const response = await fetch("assets/php/API.php", {
@@ -109,17 +133,18 @@ function showTask(tasks) {
     });
 
     const editBtn = document.createElement("button");
-    editBtn.innerText = "✏️";
+    editBtn.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89H6.41421L15.7279 9.57627ZM17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785L17.1421 8.16206ZM7.24264 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L7.24264 20.89Z"></path></svg>';
     editBtn.addEventListener("click", () => showEditTask(task, article));
 
     const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "🗑️";
+    deleteBtn.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path></svg>';
     deleteBtn.addEventListener("click", () => deleteTask(task, article));
 
     article.appendChild(status);
     article.appendChild(editBtn);
     article.appendChild(deleteBtn);
-    main.appendChild(article);
   });
 }
 
@@ -172,9 +197,12 @@ async function addTask() {
     };
 
     const result = await sendTaskData(taskData);
+    const sortSelect = document.getElementById("sortTasks");
 
     if (result.success) {
       tasks = await recupTasks();
+      const sortBy = sortSelect.value;
+      sortTasks(sortBy);
       showTask(tasks);
       form.remove();
     } else {
@@ -280,6 +308,8 @@ function showEditTask(task) {
 
     if (result.success) {
       tasks = await recupTasks();
+      const sortBy = sortSelect.value;
+      sortTasks(sortBy);
       showTask(tasks);
       form.remove();
       showNotification("Tâche mise à jour !");
@@ -364,11 +394,13 @@ function renderTaskArticle(task, article) {
   });
 
   const editBtn = document.createElement("button");
-  editBtn.innerText = "✏️";
+  editBtn.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89H6.41421L15.7279 9.57627ZM17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785L17.1421 8.16206ZM7.24264 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L7.24264 20.89Z"></path></svg>';
   editBtn.addEventListener("click", () => showEditTask(task, article));
 
   const deleteBtn = document.createElement("button");
-  deleteBtn.innerText = "🗑️";
+  deleteBtn.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path></svg>';
   deleteBtn.addEventListener("click", () => deleteTask(task, article));
 
   article.appendChild(status);
@@ -400,7 +432,7 @@ async function updateTaskData(taskData) {
   }
 }
 
-async function deleteTask(task, article) {
+async function deleteTask(task) {
   const taskData = { id: task.id };
   try {
     const response = await fetch("assets/php/API.php", {
@@ -420,6 +452,8 @@ async function deleteTask(task, article) {
       showNotification("Tâche supprimée !");
 
       tasks = await recupTasks();
+      const sortBy = sortSelect.value;
+      sortTasks(sortBy);
       showTask(tasks);
       return { success: true };
     }
@@ -457,4 +491,24 @@ function hideNotification() {
     notification.classList.add("hide");
     setTimeout(() => notification.remove(), 400);
   }
+}
+
+function sortTasks(sortBy) {
+  const importanceOrder = { important: 1, normal: 2, peu_important: 3 };
+
+  tasks.sort((a, b) => {
+    switch (sortBy) {
+      case "importance":
+        return importanceOrder[a.importance] - importanceOrder[b.importance];
+      case "deadLine":
+        return new Date(a.deadLine) - new Date(b.deadLine);
+      case "status":
+        return b.isDone - a.isDone;
+      default:
+        if (a.isDone !== b.isDone) return b.isDone - a.isDone;
+        if (new Date(a.deadLine) !== new Date(b.deadLine))
+          return new Date(b.deadLine) - new Date(a.deadLine);
+        return importanceOrder[a.importance] - importanceOrder[b.importance];
+    }
+  });
 }

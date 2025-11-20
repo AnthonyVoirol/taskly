@@ -40,7 +40,7 @@ function message()
 
 <body>
     <header>
-        <h1>To-Do-List</h1>
+        <h1>Taskly</h1>
 
         <div class="profile-container">
             <img class="avatar" id="avatar" src="<?php echo 'assets/avatars/' . $_SESSION['avatar'] . '.png'; ?>"
@@ -56,8 +56,19 @@ function message()
     </header>
 
     <main>
+        <label for="sortTasks">Trier par :</label>
+        <select id="sortTasks">
+            <option value="default">Par défaut</option>
+            <option value="importance">Importance</option>
+            <option value="deadLine">Date limite</option>
+            <option value="status">Statut</option>
+        </select>
+
         <section id="main">
             <!-- tâche -->
+        </section>
+        <section id="done">
+            <!-- isDone -->
         </section>
         <button id="addTask">+</button>
     </main>
