@@ -2,13 +2,18 @@
 require_once 'dbConfig.php';
 require_once 'auth.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (session_status() === PHP_SESSION_NONE) {
   session_start();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $rememberMeCheck = isset($_POST['rememberMe']);
 
   $message = login_user(
     $conn,
     trim($_POST['email'] ?? ''),
-    $_POST['password'] ?? ''
+    $_POST['password'] ?? '',
+    $rememberMeCheck
   );
 
   if ($message === 'Login successful.') {

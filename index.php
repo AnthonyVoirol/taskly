@@ -1,8 +1,13 @@
 <?php
-require_once 'assets/php/auth.php';
 require_once 'assets/php/dbConfig.php';
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once 'assets/php/auth.php';
+
+
 getUserInfo($conn);
 
 
@@ -38,7 +43,8 @@ function message()
         <h1>To-Do-List</h1>
 
         <div class="profile-container">
-            <img class="avatar" id="avatar" src="<?php echo 'assets/avatars/' . $_SESSION['avatar'] . '.png'; ?>" alt="avatar">
+            <img class="avatar" id="avatar" src="<?php echo 'assets/avatars/' . $_SESSION['avatar'] . '.png'; ?>"
+                alt="avatar">
             <div class="profile-menu" id="profileMenu">
                 <ul>
                     <li><a href="assets/php/account.php">Mon compte</a></li>
