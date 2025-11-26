@@ -500,15 +500,8 @@ function sortTasks(sortBy) {
     switch (sortBy) {
       case "importance":
         return importanceOrder[a.importance] - importanceOrder[b.importance];
-      case "deadLine":
-        return new Date(a.deadLine) - new Date(b.deadLine);
-      case "status":
-        return b.isDone - a.isDone;
       default:
-        if (a.isDone !== b.isDone) return b.isDone - a.isDone;
-        if (new Date(a.deadLine) !== new Date(b.deadLine))
-          return new Date(b.deadLine) - new Date(a.deadLine);
-        return importanceOrder[a.importance] - importanceOrder[b.importance];
+        return new Date(a.deadLine) - new Date(b.deadLine);
     }
   });
 }

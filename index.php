@@ -58,8 +58,6 @@ function message()
         <select id="sortTasks">
             <option value="default">Par défaut</option>
             <option value="importance">Importance</option>
-            <option value="deadLine">Date limite</option>
-            <option value="status">Statut</option>
         </select>
 
         <section id="main">
