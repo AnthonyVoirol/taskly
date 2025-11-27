@@ -12,13 +12,24 @@ function AccountDisplay() {
 
     const avatar = document.createElement("div");
     const img = document.createElement("img");
+    img.classList.add("imgAvatar");
     img.src = pathAvatar;
+
+    const email = document.createElement("input");
+    email.value = "monemail@example.com";
+    email.readOnly = true;
+
+    const username = document.createElement("input");
+    username.value = "monusername";
+    username.readOnly = true;
 
     avatar.appendChild(img);
 
     display.appendChild(h1);
     display.appendChild(avatar);
-};
+    display.appendChild(email);
+    display.appendChild(username);
+}
 
 function appearanceDisplay() {
 
