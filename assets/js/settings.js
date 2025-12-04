@@ -32,6 +32,9 @@ function AccountDisplay(display) {
   img.classList.add("imgAvatar");
   img.src = pathAvatar;
 
+  const bg = document.createElement("div");
+  bg.classList.add("bgAvatar");
+
   const overlayAvatar = document.createElement("img");
   overlayAvatar.classList.add("overlayAvatar");
   overlayAvatar.src = pathOverlay;
@@ -76,6 +79,7 @@ function AccountDisplay(display) {
   });
 
   avatar.appendChild(img);
+  avatar.appendChild(bg);
   avatar.appendChild(overlayAvatar);
   avatar.appendChild(fileInput);
 

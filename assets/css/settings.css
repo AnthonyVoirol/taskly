@@ -148,6 +148,21 @@ a:hover {
   object-fit: cover;
   border: 3px solid var(--border-color);
   display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.bgAvatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background-color: rgba(128, 128, 128, 0.5);
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .overlayAvatar {
@@ -160,7 +175,8 @@ a:hover {
   border-radius: 50%;
   object-fit: cover;
   pointer-events: none;
-  /*opacity: 0.7;*/
+  z-index: 3;
+  opacity: 0.8;
 }
 
 /* Style pour l'input username */
