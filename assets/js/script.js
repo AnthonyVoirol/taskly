@@ -1,6 +1,11 @@
 let tasks = [];
 let sortSelect;
 
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+}
+
 async function init() {
   tasks = await recupTasks();
   if (tasks) {

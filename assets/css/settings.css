@@ -1,20 +1,244 @@
+/* Variables pour le thème clair */
+:root {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --border-hover: #cbd5e0;
+    --button-hover: #e2e8f0;
+    --button-active: #d1d5db;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+    --accent-primary: #3b82f6;
+    --accent-hover: #2563eb;
+    --accent-light: #eff6ff;
+    --accent-border: #dbeafe;
+    --danger-bg: #fef2f2;
+    --danger-text: #dc2626;
+    --danger-border: #fecaca;
+    --overlay: rgba(15, 23, 42, 0.4);
+}
+
+/* Variables pour le thème sombre */
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --border-hover: #475569;
+    --button-hover: #334155;
+    --button-active: #475569;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --accent-primary: #3b82f6;
+    --accent-hover: #2563eb;
+    --accent-light: #1e3a5f;
+    --accent-border: #1e40af;
+    --danger-bg: #3f1f1f;
+    --danger-text: #f87171;
+    --danger-border: #7f1d1d;
+    --overlay: rgba(0, 0, 0, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 20px;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 8px 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+a:hover {
+    background-color: var(--button-hover);
+}
+
 .main {
     display: grid;
-    grid-template-columns: 0.2fr 1fr;
+    grid-template-columns: 250px 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.settings {
+    padding-right: 30px;
+    border-right: 2px solid var(--border-color);
+}
+
+.settings h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: 600;
 }
 
 .btnSettings {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
-.settings {
-    padding-right: 20px;
-    border-right: solid 4px black;
+.noButton {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    font-family: inherit;
 }
 
+.noButton:hover {
+    background-color: var(--button-hover);
+}
+
+.noButton:active {
+    background-color: var(--button-active);
+}
+
+#display {
+    padding: 20px;
+}
+
+#display h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Style pour l'avatar */
 .imgAvatar {
-    width: 20%;
-    height: 20%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border-color);
+    margin: 20px 0;
+}
+
+/* Style pour l'input username */
+input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    margin-top: 20px;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+input[readonly] {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Style pour les boutons de thème */
+button {
+    padding: 12px 24px;
+    font-size: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+button:active {
+    transform: translateY(0);
+    background-color: var(--button-active);
+}
+
+/* Bouton actif pour le thème sélectionné */
+button.active-theme {
+    background-color: var(--accent-primary);
+    color: #ffffff;
+    border-color: var(--accent-primary);
+}
+
+button.active-theme:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .settings {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 20px;
+    }
+    
+    .btnSettings {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #display {
+        padding: 10px;
+    }
+
+    #display h1 {
+        font-size: 24px;
+    }
+
+    button {
+        margin-right: 5px;
+        margin-top: 5px;
+        padding: 10px 20px;
+    }
 }
