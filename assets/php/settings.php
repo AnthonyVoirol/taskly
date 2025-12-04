@@ -11,7 +11,7 @@ $username = $_SESSION['username'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compte</title>
-    <link rel="stylesheet" href="../css/settings.css?v=1.0">
+    <link rel="stylesheet" href="../css/settings.css?v=1.1">
 </head>
 
 <body>
@@ -33,7 +33,7 @@ $username = $_SESSION['username'];
         const pathAvatar = "<?php echo '../avatars/' . $avatar . '.png'; ?>";
         const username = "<?php echo $username ?>"; 
     </script>
-    <script src="../js/settings.js?v=1.0"></script>
+    <script src="../js/settings.js?v=1.1"></script>
 </body>
 
 </html>
