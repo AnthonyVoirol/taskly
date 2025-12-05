@@ -33,8 +33,8 @@ function message()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do-List</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=Beta">
+    <title>Taskly</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=1.0">
 </head>
 
 <body>
@@ -54,16 +54,17 @@ function message()
     </header>
 
     <main>
-        <label for="sortTasks">Trier par :</label>
-        <select id="sortTasks">
-            <option value="default">Par défaut</option>
-            <option value="importance">Importance</option>
-            <option value="deadLine">Date limite</option>
-            <option value="status">Statut</option>
-        </select>
+        <div class="sort-container">
+            <label for="sortTasks">Trier par :</label>
+            <select id="sortTasks">
+                <option value="default">Par défaut</option>
+                <option value="importance">Importance</option>
+                <option value="isSchool">École</option>
+            </select>
+        </div>
 
         <section id="main">
-            <!-- tâche -->
+            <!-- task -->
         </section>
         <section id="done">
             <!-- isDone -->
@@ -74,8 +75,8 @@ function message()
     <footer>
         <p>Fait par Ant.V</p>
     </footer>
-    <script src="assets/js/script.js?v=Beta"></script>
-    <script src="assets/js/account.js?v=Beta"></script>
+    <script src="assets/js/script.js?v=1.0"></script>
+    <script src="assets/js/account.js?v=1.0"></script>
     <?php message(); ?>
 </body>
 
