@@ -1,22 +1,14 @@
 <?php
 require_once 'assets/php/dbConfig.php';
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 require_once 'assets/php/auth.php';
-
-
 getUserInfo($conn);
-
-
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: assets/php/signIn.php");
     exit();
 }
-
 function message()
 {
     if (isset($_SESSION['flash_message'])) {
@@ -26,23 +18,19 @@ function message()
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taskly</title>
     <link rel="stylesheet" href="assets/css/style.css?v=1.0">
 </head>
-
 <body>
     <header>
         <h1>Taskly</h1>
-
         <div class="profile-container">
-            <img class="avatar" id="avatar" src="<?php echo 'assets/avatars/' . $_SESSION['avatar'] . '.png'; ?>"
+            <img class="avatar" id="avatar" src="<?php echo 'assets/avatars/' . $_SESSION['avatar'] . '.png?t=' . time(); ?>"
                 alt="avatar">
             <div class="profile-menu" id="profileMenu">
                 <ul>
@@ -52,7 +40,6 @@ function message()
             </div>
         </div>
     </header>
-
     <main>
         <div class="sort-container">
             <label for="sortTasks">Trier par :</label>
@@ -62,7 +49,6 @@ function message()
                 <option value="isSchool">École</option>
             </select>
         </div>
-
         <section id="main">
             <!-- task -->
         </section>
@@ -71,7 +57,6 @@ function message()
         </section>
         <button id="addTask">+</button>
     </main>
-
     <footer>
         <p>Fait par Ant.V</p>
     </footer>
@@ -79,5 +64,4 @@ function message()
     <script src="assets/js/account.js?v=1.0"></script>
     <?php message(); ?>
 </body>
-
 </html>

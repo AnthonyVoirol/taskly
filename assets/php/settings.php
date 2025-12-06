@@ -1,11 +1,6 @@
 <?php
 session_start();
 $avatar = $_SESSION['avatar'] ?? "default";
-
-if (!isset($_SESSION['username'])) {
-    echo "error, username doesn't exist";
-    exit;
-}
 $username = $_SESSION['username'];
 ?>
 

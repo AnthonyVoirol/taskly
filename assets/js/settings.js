@@ -2,6 +2,8 @@ const btnAccount = document.getElementById("btnAccount");
 const btnAppearance = document.getElementById("btnAppearance");
 const btnNotification = document.getElementById("btnNotification");
 
+let currentPathAvatar = pathAvatar;
+
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) {
   document.documentElement.setAttribute("data-theme", savedTheme);
@@ -30,7 +32,7 @@ function AccountDisplay(display) {
 
   const img = document.createElement("img");
   img.classList.add("imgAvatar");
-  img.src = pathAvatar;
+  img.src = currentPathAvatar + "?t=" + Date.now();
 
   const bg = document.createElement("div");
   bg.classList.add("bgAvatar");
@@ -66,15 +68,17 @@ function AccountDisplay(display) {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.newPath) {
+        if (data.success && data.newPath) {
+          currentPathAvatar = data.newPath;
           img.src = data.newPath + "?t=" + Date.now();
+          localStorage.setItem("avatarTimestamp", Date.now());
         } else {
-          alert("Erreur update");
+          alert(data.error || "Erreur lors de la mise à jour");
         }
       })
       .catch((err) => {
         console.error(err);
-        alert("Error send file");
+        alert("Erreur lors de l'envoi du fichier");
       });
   });
 
