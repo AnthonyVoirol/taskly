@@ -1,10 +1,14 @@
 function OpenSettingAccount() {
   const avatarImg = document.getElementById("avatar");
   
-  const lastUpdate = localStorage.getItem("avatarTimestamp");
-  if (lastUpdate && avatarImg) {
+  if (!avatarImg) return;
+  
+  // Vérifier si l'avatar a été mis à jour
+  const avatarUpdated = sessionStorage.getItem("avatarUpdated");
+  if (avatarUpdated) {
     const currentSrc = avatarImg.src.split("?")[0];
-    avatarImg.src = currentSrc + "?t=" + lastUpdate;
+    avatarImg.src = currentSrc + "?t=" + avatarUpdated;
+    sessionStorage.removeItem("avatarUpdated");
   }
   
   avatarImg.addEventListener("click", () => {

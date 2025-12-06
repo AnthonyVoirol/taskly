@@ -69,9 +69,14 @@ function AccountDisplay(display) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.newPath) {
-          currentPathAvatar = data.newPath;
-          img.src = data.newPath + "?t=" + Date.now();
-          localStorage.setItem("avatarTimestamp", Date.now());
+          const timestamp = data.timestamp || Date.now();
+
+          // Mettre à jour l'image actuelle dans les settings
+          img.src = data.newPath + "?t=" + timestamp;
+
+          // Rediriger vers la page d'accueil pour forcer le refresh complet
+          alert("Avatar mis à jour avec succès !");
+          window.location.href = "../../";
         } else {
           alert(data.error || "Erreur lors de la mise à jour");
         }

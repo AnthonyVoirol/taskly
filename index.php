@@ -20,17 +20,19 @@ function message()
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taskly</title>
     <link rel="stylesheet" href="assets/css/style.css?v=1.0">
 </head>
+
 <body>
     <header>
         <h1>Taskly</h1>
         <div class="profile-container">
-            <img class="avatar" id="avatar" src="<?php echo 'assets/avatars/' . $_SESSION['avatar'] . '.png?t=' . time(); ?>"
+            <img class="avatar" id="avatar" src="<?php echo 'assets/avatars/' . $_SESSION['avatar'] . '.png'; ?>"
                 alt="avatar">
             <div class="profile-menu" id="profileMenu">
                 <ul>
@@ -60,8 +62,9 @@ function message()
     <footer>
         <p>Fait par Ant.V</p>
     </footer>
-    <script src="assets/js/script.js?v=1.0"></script>
-    <script src="assets/js/account.js?v=1.0"></script>
+    <script src="assets/js/script.js?v=1.1"></script>
+    <script src="assets/js/account.js?v=1.1"></script>
     <?php message(); ?>
 </body>
+
 </html>
