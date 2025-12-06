@@ -38,7 +38,7 @@ $username = $_SESSION['username'];
         const pathAvatar = "<?php echo '../avatars/' . $avatar . '.png'; ?>";
         const username = "<?php echo $username ?>"; 
     </script>
-    <script src="../js/settings.js?v=1.2"></script>
+    <script src="../js/settings.js?v=1.3"></script>
 </body>
 
 </html>
