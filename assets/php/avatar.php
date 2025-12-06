@@ -91,14 +91,16 @@ try {
     imagedestroy($sourceImage);
 
     $avatarPath = $username;
-    $stmt = $conn->prepare("UPDATE users SET avatar_path = ? WHERE id = ?");
-    $stmt->bind_param("si", $avatarPath, $_SESSION['user_id']);
+    $timestamp = time();
+    
+    // Mettre à jour la base de données avec le timestamp
+    $stmt = $conn->prepare("UPDATE users SET avatar_path = ?, avatar_timestamp = ? WHERE id = ?");
+    $stmt->bind_param("sii", $avatarPath, $timestamp, $_SESSION['user_id']);
     $stmt->execute();
     $stmt->close();
 
     $_SESSION['avatar'] = $username;
-
-    $timestamp = time();
+    $_SESSION['avatar_timestamp'] = $timestamp;
     
     echo json_encode([
         "success" => true,

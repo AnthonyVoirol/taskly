@@ -74,9 +74,17 @@ function AccountDisplay(display) {
           // Mettre à jour l'image actuelle dans les settings
           img.src = data.newPath + "?t=" + timestamp;
 
-          // Rediriger vers la page d'accueil pour forcer le refresh complet
+          // Forcer le rechargement de l'image sur la page d'accueil
+          if (window.opener && !window.opener.closed) {
+            window.opener.location.reload();
+          }
+          
           alert("Avatar mis à jour avec succès !");
-          window.location.href = "../../";
+          
+          // Rediriger après 1 seconde
+          setTimeout(() => {
+            window.location.href = "../../";
+          }, 1000);
         } else {
           alert(data.error || "Erreur lors de la mise à jour");
         }
