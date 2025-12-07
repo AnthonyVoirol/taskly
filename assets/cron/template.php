@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../php/dbConfig.php';
 
-$APP_ID = "5bc6a16f-4a8c-444d-a5e1-88e03c418b5e";
-$REST_API_KEY = "os_v2_app_lpdkc32krrce3jpbrdqdyqmllyons6raqw5eo75cbyflewzunkzskxoiwu3vpxiptn7dy7v4ngmdehikvwnf6lxr4lm7u636gsidxvy";
+$APP_ID = "";
+$REST_API_KEY = "";
 
 $tomorrow = date('Y-m-d', strtotime('+1 day'));
 
