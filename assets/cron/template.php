@@ -6,21 +6,12 @@ $REST_API_KEY = "";
 
 $tomorrow = date('Y-m-d', strtotime('+1 day'));
 
-file_put_contents(__DIR__ . "/log.txt",
-    "\n=== CRON DÉMARRÉ: " . date("Y-m-d H:i:s") . " ===\n",
-    FILE_APPEND
-);
-
-file_put_contents(__DIR__ . "/log.txt",
-    "Recherche des tâches pour: $tomorrow\n",
-    FILE_APPEND
-);
-
 $query = $conn->prepare("
     SELECT tasks.id, tasks.task, tasks.deadLine, users.id AS user_id
     FROM tasks
     JOIN users ON tasks.user_id = users.id
     WHERE DATE(tasks.deadLine) = ?
+      AND tasks.isDone = 0
 ");
 
 $query->bind_param("s", $tomorrow);
@@ -28,71 +19,80 @@ $query->execute();
 $result = $query->get_result();
 
 $count = 0;
+$successCount = 0;
+$errorCount = 0;
 
 while ($task = $result->fetch_assoc()) {
     $count++;
-    $userId = $task['user_id'];
+    $userId = (string)$task['user_id'];
     $taskName = $task['task'];
-
-    file_put_contents(__DIR__ . "/log.txt",
-        "Tâche trouvée: $taskName (user_id: $userId)\n",
-        FILE_APPEND
-    );
 
     $payload = [
         "app_id" => $APP_ID,
         "include_aliases" => [
-            "external_id" => [ (string)$userId ]
+            "external_id" => [$userId]
         ],
         "target_channel" => "push",
-        "headings" => ["fr" => "Rappel de tâche"],
-        "contents" => ["fr" => "Votre tâche \"$taskName\" arrive à échéance demain !"],
-        "priority" => 10
+        "headings" => [
+            "en" => "Task reminder",
+            "fr" => "Rappel de tâche"
+        ],
+        "contents" => [
+            "en" => "Your task \"$taskName\" is due tomorrow!",
+            "fr" => "Votre tâche \"$taskName\" arrive à échéance demain !"
+        ],
+        "priority" => 10,
+        "ios_interruption_level" => "time_sensitive"
     ];
 
-    file_put_contents(__DIR__ . "/log.txt",
-        "Payload envoyé: " . json_encode($payload, JSON_PRETTY_PRINT) . "\n",
-        FILE_APPEND
-    );
-
-    $ch = curl_init("https://api.onesignal.com/notifications");
+    $ch = curl_init("https://api.onesignal.com/notifications?c=push");
 
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         "Content-Type: application/json; charset=utf-8",
-        "Authorization: Basic $REST_API_KEY"
+        "Authorization: Key " . $REST_API_KEY
     ]);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $curlError = curl_error($ch);
     curl_close($ch);
 
-    file_put_contents(__DIR__ . "/log.txt",
-        "HTTP Code: $httpCode\n",
-        FILE_APPEND
-    );
-
     if ($curlError) {
+        $errorCount++;
         file_put_contents(__DIR__ . "/log.txt",
-            "Erreur CURL: $curlError\n",
+            "[ERROR] CURL Error: $curlError\n",
             FILE_APPEND
         );
+    } else {
+        $responseData = json_decode($response, true);
+        
+        if ($httpCode >= 200 && $httpCode < 300) {
+            if (isset($responseData['id']) && !empty($responseData['id'])) {
+                $successCount++;
+            } else {
+                $errorCount++;
+                file_put_contents(__DIR__ . "/log.txt",
+                    "[WARNING] User $userId not subscribed to push notifications\n",
+                    FILE_APPEND
+                );
+            }
+        } else {
+            $errorCount++;
+            file_put_contents(__DIR__ . "/log.txt",
+                "[ERROR] HTTP $httpCode - Response: " . json_encode($responseData) . "\n",
+                FILE_APPEND
+            );
+        }
     }
-
-    file_put_contents(__DIR__ . "/log.txt",
-        "Réponse OneSignal: $response\n\n",
-        FILE_APPEND
-    );
 }
 
-file_put_contents(__DIR__ . "/log.txt",
-    "=== CRON TERMINÉ: $count tâche(s) trouvée(s) ===\n",
-    FILE_APPEND
-);
+$query->close();
+$conn->close();
 
-echo "CRON OK - $count notification(s) envoyée(s)";
+echo "CRON OK - $count task(s) processed - $successCount success - $errorCount error(s)";
 ?>

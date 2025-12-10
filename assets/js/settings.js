@@ -77,7 +77,7 @@ function AccountDisplay(display) {
           if (window.opener && !window.opener.closed) {
             window.opener.location.reload();
           }
-          
+
           alert("Avatar mis à jour avec succès !");
 
           setTimeout(() => {
@@ -138,6 +138,10 @@ function AppearanceDisplay(display) {
 }
 
 function NotificationDisplay(display) {
+  /*Dans ta page de paramètres
+  document.getElementById('enableNotifs').addEventListener('click', async () => {
+      await OneSignal.Slidedown.promptPush();
+  });*/
   const h1 = document.createElement("h1");
   h1.innerText = "Notification";
 

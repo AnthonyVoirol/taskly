@@ -17,11 +17,9 @@ function message()
         unset($_SESSION['flash_message']);
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,17 +33,22 @@ function message()
                 appId: "5bc6a16f-4a8c-444d-a5e1-88e03c418b5e",
                 safari_web_id: "web.onesignal.auto.1172fa5f-6e39-45ba-9a29-ceb4d8311220",
                 notifyButton: {
-                    enable: true,
+                    enable: false
                 },
+                allowLocalhostAsSecureOrigin: true
             });
-
-            await OneSignal.login("<?php echo $_SESSION['user_id']; ?>");
+            
+            const userId = "<?php echo $_SESSION['user_id']; ?>";
+            await OneSignal.login(userId);
+            
+            const permission = await OneSignal.Notifications.permission;
+            
+            if (permission === false) {
+                await OneSignal.Slidedown.promptPush();
+            }
         });
     </script>
-
-
 </head>
-
 <body>
     <header>
         <h1>Taskly</h1>
@@ -84,5 +87,4 @@ function message()
     <script src="assets/js/account.js?v=1.2"></script>
     <?php message(); ?>
 </body>
-
 </html>
