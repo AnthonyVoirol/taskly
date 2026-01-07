@@ -141,9 +141,6 @@ function NotificationDisplay(display) {
   const h1 = document.createElement("h1");
   h1.innerText = "Notification";
 
-  const p = document.createElement("p");
-  p.innerText = "Bientôt disponible avec d'autres paramètres";
-
   const statusText = document.createElement("p");
   statusText.style.marginTop = "10px";
   statusText.style.fontWeight = "bold";
@@ -221,7 +218,6 @@ function NotificationDisplay(display) {
   btnContainer.appendChild(btnDesactiveNotif);
 
   display.appendChild(h1);
-  display.appendChild(p);
   display.appendChild(statusText);
   display.appendChild(btnContainer);
 }
