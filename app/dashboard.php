@@ -20,11 +20,13 @@ function message()
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Taskly</title>
     <link rel="stylesheet" href="../assets/css/style.css?v=1.0">
+    <link rel="icon" type="image/png" href="../assets/img/flavicon.png">
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -37,18 +39,19 @@ function message()
                 },
                 allowLocalhostAsSecureOrigin: true
             });
-            
+
             const userId = "<?php echo $_SESSION['user_id']; ?>";
             await OneSignal.login(userId);
-            
+
             const permission = await OneSignal.Notifications.permission;
-            
+
             if (permission === false) {
                 await OneSignal.Slidedown.promptPush();
             }
         });
     </script>
 </head>
+
 <body>
     <header>
         <h1>Taskly</h1>
@@ -87,4 +90,5 @@ function message()
     <script src="../assets/js/account.js?v=1.2"></script>
     <?php message(); ?>
 </body>
+
 </html>
