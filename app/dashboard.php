@@ -36,7 +36,7 @@ function message()
 
     <link rel="canonical" href="https://taskly.voirol.tech.com/app/dashboard.php">
 
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="../assets/css/style.css?v=1.0">
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
