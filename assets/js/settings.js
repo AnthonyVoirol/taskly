@@ -1,6 +1,7 @@
 const btnAccount = document.getElementById("btnAccount");
 const btnAppearance = document.getElementById("btnAppearance");
 const btnNotification = document.getElementById("btnNotification");
+const btnAbout = document.getElementById("btnAbout");
 
 let currentPathAvatar = pathAvatar;
 
@@ -14,6 +15,7 @@ showView(AccountDisplay);
 btnAccount.addEventListener("click", () => showView(AccountDisplay));
 btnAppearance.addEventListener("click", () => showView(AppearanceDisplay));
 btnNotification.addEventListener("click", () => showView(NotificationDisplay));
+btnAbout.addEventListener("click", () => showView(AboutDisplay));
 
 function showView(viewFunction) {
   const display = document.getElementById("display");
@@ -158,13 +160,12 @@ function NotificationDisplay(display) {
   btnDesactiveNotif.innerText = "Désactiver notification";
 
   window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-
+  OneSignalDeferred.push(async function (OneSignal) {
     async function updateStatus() {
       try {
         const permission = await OneSignal.Notifications.permission;
         const isPushEnabled = await OneSignal.User.PushSubscription.optedIn;
-        
+
         if (permission && isPushEnabled) {
           statusText.innerText = "Notifications activées";
           statusText.style.color = "green";
@@ -185,14 +186,14 @@ function NotificationDisplay(display) {
     btnActiveNotif.addEventListener("click", async () => {
       try {
         const permission = await OneSignal.Notifications.permission;
-        
+
         if (permission === false) {
           await OneSignal.Slidedown.promptPush();
         } else {
           await OneSignal.User.PushSubscription.optIn();
           alert("Notifications activées !");
         }
-        
+
         await updateStatus();
       } catch (error) {
         console.error("Activation error:", error);
@@ -220,4 +221,61 @@ function NotificationDisplay(display) {
   display.appendChild(h1);
   display.appendChild(statusText);
   display.appendChild(btnContainer);
+}
+
+function AboutDisplay(display) {
+  const h2 = document.createElement("h2");
+  h2.innerText = "Taskly";
+
+  const version = document.createElement("p");
+  version.innerText = "Version : 2.0.0";
+
+  const dev = document.createElement("p");
+  dev.innerText = "Développeur : Anthony Voirol";
+
+  const description = document.createElement("p");
+  description.classList.add("about-description");
+  description.innerText =
+    "Taskly est une application de gestion de tâches simplifiée, conçue pour vous aider à organiser votre quotidien efficacement. Ajoutez, gérez et suivez vos priorités en quelques clics grâce à une interface légère et intuitive.";
+
+  const linksContainer = document.createElement("div");
+  linksContainer.classList.add("about-links");
+
+  const createLink = (label, url, detail = "") => {
+    const p = document.createElement("p");
+    p.innerHTML = `<strong>${label} :</strong> `;
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.innerText = url.replace("https://", "");
+
+    p.appendChild(a);
+    if (detail) {
+      const spanDetail = document.createElement("span");
+      spanDetail.innerText = ` (${detail})`;
+      p.appendChild(spanDetail);
+    }
+    return p;
+  };
+
+  linksContainer.appendChild(
+    createLink("Site Web", "https://taskly.voirol.tech")
+  );
+  linksContainer.appendChild(
+    createLink("Code Source", "https://github.com/AnthonyVoirol/taskly")
+  );
+  linksContainer.appendChild(
+    createLink(
+      "Licence",
+      "https://github.com/AnthonyVoirol/taskly/blob/main/LICENSE",
+      "MIT"
+    )
+  );
+
+  display.appendChild(h2);
+  display.appendChild(version);
+  display.appendChild(dev);
+  display.appendChild(description);
+  display.appendChild(linksContainer);
 }

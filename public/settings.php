@@ -30,7 +30,7 @@ $username = $_SESSION['username'] ?? 'User';
 
     <meta name="robots" content="noindex, nofollow">
 
-    <link rel="stylesheet" href="../assets/css/settings.css?v=1.2">
+    <link rel="stylesheet" href="../assets/css/settings.css?v=2">
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -48,7 +48,7 @@ $username = $_SESSION['username'] ?? 'User';
 </head>
 
 <body>
-    <a href="../app/dashboard.php">← Retour</a>
+    <a class = "exit" href="../app/dashboard.php">← Retour</a>
     <div class="main">
         <section class="settings">
             <h1>Paramètres</h1>
@@ -56,6 +56,7 @@ $username = $_SESSION['username'] ?? 'User';
                 <button class="noButton" id="btnAccount">Compte</button>
                 <button class="noButton" id="btnAppearance">Apparence</button>
                 <button class="noButton" id="btnNotification">Notification</button>
+                <button class="noButton" id="btnAbout">A propos</button>
             </div>
         </section>
         <section id="display">

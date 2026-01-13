@@ -61,7 +61,7 @@ body {
   padding: 20px;
 }
 
-a {
+.exit {
   color: var(--text-primary);
   text-decoration: none;
   padding: 8px 16px;
@@ -72,7 +72,7 @@ a {
   transition: background-color 0.2s ease;
 }
 
-a:hover {
+.exit :hover {
   background-color: var(--button-hover);
 }
 
@@ -278,5 +278,52 @@ button.active-theme:hover {
     margin-right: 5px;
     margin-top: 5px;
     padding: 10px 20px;
+  }
+}
+
+.about-description {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-primary) !important;
+  max-width: 600px;
+}
+
+.about-links {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.about-links p {
+  margin-bottom: 12px;
+  color: var(--text-primary) !important;
+}
+
+.about-links a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.about-links a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.about-links span {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .about-description {
+    font-size: 14px;
+  }
+
+  .about-links a {
+    word-break: break-all;
   }
 }
