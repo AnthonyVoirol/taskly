@@ -26,7 +26,7 @@ $username = $_SESSION['username'] ?? 'User';
     <meta name="description"
         content="Gérez vos paramètres Taskly : avatar, notifications, apparence et préférences personnelles.">
 
-    <link rel="canonical" href="https://taskly.voirol.tech.com/public/settings.php">
+    <link rel="canonical" href="https://taskly.voirol.tech/public/settings.php">
 
     <meta name="robots" content="noindex, nofollow">
 

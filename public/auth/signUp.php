@@ -37,17 +37,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta property="og:title" content="Inscription Gratuite - Taskly">
   <meta property="og:description"
     content="Créez votre compte gratuit et commencez à organiser vos tâches efficacement. Aucune carte bancaire requise.">
-  <meta property="og:image" content="https://taskly.voirol.tech.com/assets/img/taskly-preview.jpg">
-  <meta property="og:url" content="https://taskly.voirol.tech.com/public/auth/signUp.php">
+  <meta property="og:image" content="https://taskly.voirol.tech/assets/img/taskly-preview.jpg">
+  <meta property="og:url" content="https://taskly.voirol.tech/public/auth/signUp.php">
   <meta property="og:type" content="website">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Inscription Gratuite - Taskly">
   <meta name="twitter:description"
     content="Rejoignez Taskly gratuitement. Organisation simple et efficace de toutes vos tâches.">
-  <meta name="twitter:image" content="https://taskly.voirol.tech.com/assets/img/taskly-preview.jpg">
+  <meta name="twitter:image" content="https://taskly.voirol.tech/assets/img/taskly-preview.jpg">
 
-  <link rel="canonical" href="https://taskly.voirol.tech.com/public/auth/signUp.php">
+  <link rel="canonical" href="https://taskly.voirol.tech/public/auth/signUp.php">
   <link rel="stylesheet" href="../../assets/css/auth.css" />
 </head>
 

@@ -31,10 +31,10 @@ function message()
 
     <meta property="og:title" content="Dashboard - Taskly">
     <meta property="og:description" content="Accédez à votre espace personnel Taskly">
-    <meta property="og:url" content="https://taskly.voirol.tech.com/app/dashboard.php">
+    <meta property="og:url" content="https://taskly.voirol.tech/app/dashboard.php">
     <meta property="og:type" content="website">
 
-    <link rel="canonical" href="https://taskly.voirol.tech.com/app/dashboard.php">
+    <link rel="canonical" href="https://taskly.voirol.tech/app/dashboard.php">
 
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="../assets/css/style.css?v=1.0">

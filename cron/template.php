@@ -34,12 +34,10 @@ while ($task = $result->fetch_assoc()) {
         ],
         "target_channel" => "push",
         "headings" => [
-            "en" => "Task reminder",
-            "fr" => "Rappel de tâche"
+            "en" => "Rappel de tâche"
         ],
         "contents" => [
-            "en" => "Your task \"$taskName\" is due tomorrow!",
-            "fr" => "Votre tâche \"$taskName\" arrive à échéance demain !"
+            "en" => "Votre tâche \"$taskName\" arrive à échéance demain !"
         ],
         "priority" => 10,
         "ios_interruption_level" => "time_sensitive"

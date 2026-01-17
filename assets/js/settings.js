@@ -83,7 +83,7 @@ function AccountDisplay(display) {
           alert("Avatar mis à jour avec succès !");
 
           setTimeout(() => {
-            window.location.href = "../";
+            window.location.href = "../app/dashboard.php";
           }, 1000);
         } else {
           alert(data.error || "Erreur lors de la mise à jour");
